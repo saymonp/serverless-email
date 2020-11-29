@@ -45,8 +45,11 @@ provider:
 #            - "/*"
 
 # you can define service wide environment variables here
-#  environment:
-#    variable1: value1
+environment:
+  HOST_UMBLER: ${env:HOST_UMBLER}
+  PORT_UMBLER: ${env:PORT_UMBLER}
+  USER_UMBLER: ${env:USER_UMBLER}
+  PASS_UMBLER: ${env:PASS_UMBLER}
 
 # you can add packaging information here
 #package:
