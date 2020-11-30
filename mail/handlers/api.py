@@ -24,7 +24,3 @@ def send_email(event, context):
         return {"ok": "Email sent"}
     except Exception as e:
         raise AppError(f"Email sending failed {e}")
-
-@lambda_method
-def debug(event, context):
-    return {"ok": event}
