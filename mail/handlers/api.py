@@ -1,16 +1,30 @@
+import json
 from ..util import lambda_method
 from ..errors import AppError
+from mail.mail import Mail
 
 
 @lambda_method
 def send_email(event, context):
     try:
-        first_name = event["firstName"]
-        last_name = event["lastName"]
-        client_email = event["clientEmail"]
-        subject = event["subject"]
-        message = event["message"]
+        body = json.loads(event['body'])
 
-        return {"first_name": first_name, "last_name": last_name, "client_email": client_email, "subject": subject, "message": message}
-    except:
-        raise AppError("Email sending failed")
+        first_name = body["firstName"]
+        last_name = body["lastName"]
+        client_email = body["clientEmail"]
+        subject = body["subject"]
+        message = body["message"]
+        
+        reply_to = f"{first_name} {last_name} <{client_email}>"
+
+        email = Mail()
+        email.send_email(reply_to, subject, message)
+
+
+        return {"ok": "Email sent"}
+    except Exception as e:
+        raise AppError(f"Email sending failed {e}")
+
+@lambda_method
+def debug(event, context):
+    return {"ok": event}

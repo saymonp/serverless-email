@@ -13,7 +13,7 @@ class Mail(object):
     def __init__(self):
         pass
 
-    def send_email(self, reply_to, message):
+    def send_email(self, reply_to, subject, message):
         # set up the SMTP server
         s = smtplib.SMTP(host=self.host, port=self.port)
         s.starttls()
@@ -25,7 +25,7 @@ class Mail(object):
         msg['From'] = self.user
         msg['To'] = self.user
         msg['Reply-To'] = reply_to
-        msg['Subject'] = "This is TEST"
+        msg['Subject'] = subject
 
         # add in the message body
         msg.attach(MIMEText(message, 'plain'))
