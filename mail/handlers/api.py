@@ -7,7 +7,7 @@ from mail.mail import Mail
 @lambda_method
 def send_email(event, context):
     try:
-        body = json.loads(event['body'])
+        body = json.loads(event["body"])
 
         first_name = body["firstName"]
         last_name = body["lastName"]
