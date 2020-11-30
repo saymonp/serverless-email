@@ -61,7 +61,7 @@ environment:
 #    - exclude-me-dir/**
 
 functions:
-  hello:
+  sendEmail:
     handler: email.handlers.api.send_email
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events
