@@ -4,6 +4,7 @@ from email.mime.multipart import MIMEMultipart
 
 from .env import HOST_UMBLER, PORT_UMBLER, USER_UMBLER, PASS_UMBLER
 
+
 class Mail(object):
     host = HOST_UMBLER
     port = PORT_UMBLER

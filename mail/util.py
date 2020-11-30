@@ -10,7 +10,8 @@ def respond(body, code=200):
         'statusCode': code,
         'headers': {
             'Access-Control-Allow-Origin': '*',  # Required for CORS support to work
-            'Access-Control-Allow-Credentials': True,  # Required for cookies, authorization headers with HTTPS
+            # Required for cookies, authorization headers with HTTPS
+            'Access-Control-Allow-Credentials': True,
         },
         'body': json.dumps(body, default=str),
     }
@@ -28,4 +29,3 @@ def lambda_method(fun):
             traceback.print_exc()
             return respond({'error': str(e), 'class': type(e).__name__}, code=500)
     return wrapper
-

@@ -9,5 +9,5 @@ def test_handler():
 
     response = send_email(event, None)
     body = json.loads(response["body"])
-    
+
     assert body == {"ok": "Email sent"}

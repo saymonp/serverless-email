@@ -14,12 +14,11 @@ def send_email(event, context):
         client_email = body["clientEmail"]
         subject = body["subject"]
         message = body["message"]
-        
+
         reply_to = f"{first_name} {last_name} <{client_email}>"
 
         email = Mail()
         email.send_email(reply_to, subject, message)
-
 
         return {"ok": "Email sent"}
     except Exception as e:
