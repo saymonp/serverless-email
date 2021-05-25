@@ -6,32 +6,32 @@ from .env import HOST_UMBLER, PORT_UMBLER, USER_UMBLER, PASS_UMBLER
 
 
 class Mail(object):
-    host = HOST_UMBLER
-    port = PORT_UMBLER
-    user = USER_UMBLER
-    password = PASS_UMBLER
+    host_server = HOST_UMBLER
+    port_server = PORT_UMBLER
+    user_server = USER_UMBLER
+    password_server = PASS_UMBLER
 
     def __init__(self):
         pass
 
-    def send_email(self, reply_to, subject, message):
-        # set up the SMTP server
-        s = smtplib.SMTP(host=self.host, port=self.port)
+    def send_email(self, to: str, reply_to: str, subject: str, message: str):
+        # configura o servidor SMTP
+        s = smtplib.SMTP(host=self.host_server, port=self.port_server)
         s.starttls()
-        s.login(self.user, self.password)
+        s.login(self.user_server, self.password_server)
 
-        msg = MIMEMultipart()  # create a message
+        msg = MIMEMultipart()  # cria mensagem
 
-        # setup the parameters of the message
-        msg['From'] = self.user
-        msg['To'] = self.user
+        # configura os parâmetros da mensagem
+        msg['From'] = self.user_server
+        msg['To'] = to
         msg['Reply-To'] = reply_to
         msg['Subject'] = subject
 
-        # add in the message body
+        # adiciona no corpo da mensagem
         msg.attach(MIMEText(message, 'plain'))
 
-        # send the message via the server set up earlier.
+        # envia a mensagem através do servidor
         s.send_message(msg)
 
         del msg
