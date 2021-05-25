@@ -21,6 +21,6 @@ def send_email(event, context):
     reply_to = f"{first_name} {last_name} <{client_email}>"
 
     email = Mail()
-    email.send_email(to, reply_to, subject, message)
+    response = email.send_email(to, reply_to, subject, message)
 
-    return {"ok": "Email sent"}
+    return response

@@ -15,23 +15,22 @@ class Mail(object):
         pass
 
     def send_email(self, to: str, reply_to: str, subject: str, message: str):
-        # configura o servidor SMTP
-        s = smtplib.SMTP(host=self.host_server, port=self.port_server)
-        s.starttls()
-        s.login(self.user_server, self.password_server)
+        
+        with smtplib.SMTP(host=self.host_server, port=self.port_server) as s:
+            s.starttls()
+            s.login(self.user_server, self.password_server)
 
-        msg = MIMEMultipart()  # cria mensagem
+            msg = MIMEMultipart()
 
-        # configura os parâmetros da mensagem
-        msg['From'] = self.user_server
-        msg['To'] = to
-        msg['Reply-To'] = reply_to
-        msg['Subject'] = subject
+            msg['From'] = self.user_server
+            msg['To'] = to
+            msg['Reply-To'] = reply_to
+            msg['Subject'] = subject
 
-        # adiciona no corpo da mensagem
-        msg.attach(MIMEText(message, 'plain'))
+            msg.attach(MIMEText(message, 'plain'))
 
-        # envia a mensagem através do servidor
-        s.send_message(msg)
-
-        del msg
+            s.send_message(msg)
+            
+            del msg
+        
+        return {"ok": "Email sent"}
